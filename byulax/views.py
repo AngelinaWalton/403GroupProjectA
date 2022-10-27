@@ -6,7 +6,7 @@ def indexPageView(request) :
     return HttpResponse('Index')
 
 def rosterPageView(request):
-    return HttpResponse('Roster')
+    return HttpResponse('Roster' + "git test")
     
 def statsPageView(request):
     return HttpResponse('Stats')
