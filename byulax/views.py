@@ -6,11 +6,10 @@ def indexPageView(request) :
     return render(request, 'byulax/index.html')
 
 def rosterPageView(request):
-    return HttpResponse('Roster' + "git test")
-    
-def statsPageView(request):
-    return HttpResponse('Stats')
+    return render(request, 'byulax/roster.html')    
 
+def statsPageView(request):
+    return render(request, 'byulax/stats.html')
 
 def schedulePageView(request) :
-    return HttpResponse('Schedule')
+    return render(request, 'byulax/schedule.html')
