@@ -6,4 +6,5 @@ urlpatterns = [
     path('roster/', rosterPageView, name = 'roster'),
     path('schedule/', schedulePageView, name = 'schedule'),
     path('stats/', statsPageView, name = 'stats'),
+    path('schedule/add', addSchedulePage, name= 'addSchedule')
 ]

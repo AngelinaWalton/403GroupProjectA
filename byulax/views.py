@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import *
 
@@ -22,3 +22,15 @@ def schedulePageView(request) :
         "game" : data
     }
     return render(request, 'byulax/schedule.html', context)
+
+def addSchedulePage(request):
+    if request.method == 'POST':
+        new_game = Schedule()
+        new_game.date_time = request.POST['date']
+        new_game.location = request.POST['location']
+        new_game.opponent = request.POST['opponent']
+        new_game.result = request.POST['result']
+        new_game.info = request.POST['info']
+        new_game.save()
+        return redirect('schedule')
+    return render(request, 'byulax/addSchedule.html')
