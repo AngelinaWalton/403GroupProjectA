@@ -34,3 +34,14 @@ def addSchedulePage(request):
         new_game.save()
         return redirect('schedule')
     return render(request, 'byulax/addSchedule.html')
+
+def addPlayer(request) :
+    if request.method == 'POST' :
+        new_player = Player()
+        new_player.player_number = request.POST['player_number']
+        new_player.first_name = request.POST['first_name']
+        new_player.last_name = request.POST['last_name']
+        new_player.position = request.POST['position']
+        new_player.year = request.POST['year']
+        return redirect('roster')
+    return render(request, 'byulax/addRoster.html')
