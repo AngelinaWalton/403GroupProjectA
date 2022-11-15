@@ -22,4 +22,8 @@
         {% endfor %}
     </tbody>
 </table>
+
+<form action="{% url 'addRoster' %}" method="get">
+    <button type="Submit" >Add Player</button>
+</form>
 {% endblock %}
