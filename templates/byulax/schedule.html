@@ -14,24 +14,15 @@
       </tr>
     </thead>
     <tbody>
+      {% for each in game %}
       <tr>
-        <td>September 17 2022 7:00 PM</td>
-        <td>Utah State</td>
-        <td>North University Fields, BYU</td>
-        <td>0-0</td>
-        <td>Future Game</td>
+        <td>{{each.date_time}}</td>
+        <td>{{each.opponent}}</td>
+        <td>{{each.location}}</td>
+        <td>{{each.result}}</td>
+        <td>{{each.info}}</td>
       </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td colspan="2">Larry the Bird</td>
-        <td>@twitter</td>
-      </tr>
+      {% endfor %}
     </tbody>
   </table>
 {% endblock %}
