@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 <fieldset>
-    <form id="formAddSchedule" method="POST" method="">
+    <form id="formAddSchedule" method="POST">
         {% csrf_token %}
         <label for="date">Game Date and Time: </label>
         <input type="datetime-local" id="date" name="date" required>
