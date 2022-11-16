@@ -21,7 +21,14 @@ class Player(models.Model):
         choices=YEAR_IN_SCHOOL_CHOICES,
         default=FRESHMAN,
     )
-    position = models.CharField(max_length = 3) #same as above
+    position = models.CharField(max_length =4, choices=[
+        ("Att", "Attack"),
+        ("Mid", "Midfield"),
+        ("DM", "Defensive Midfield"),
+        ("LSM", "Long Stick Midfield"),
+        ("FOS", "Face Off Specialist"),
+        ("Def", "Defenseman"),
+        ("Goal", "Goalkeeper")]) #same as above
     player_number = models.PositiveSmallIntegerField()
 
     @property
@@ -47,6 +54,8 @@ class Stats(models.Model):
     assists = models.SmallIntegerField()
     points = models.SmallIntegerField()
     face_offs = models.SmallIntegerField()
+    goals_against = models.SmallIntegerField(default=0)
+    saves = models.SmallIntegerField(default=0)
     player_id = models.ForeignKey(Player, on_delete=models.PROTECT)
     game_id = models.ForeignKey(Schedule, on_delete= models.PROTECT)
 

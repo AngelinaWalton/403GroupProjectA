@@ -14,7 +14,11 @@ def rosterPageView(request):
     return render(request, 'byulax/roster.html', context)    
 
 def statsPageView(request):
-    return render(request, 'byulax/stats.html')
+    data = Stats.objects.all()
+    context = {
+        "stats": data
+    }
+    return render(request, 'byulax/stats.html', context)
 
 def schedulePageView(request) :
     data = Schedule.objects.all()
@@ -45,3 +49,23 @@ def addPlayer(request) :
         new_player.year = request.POST['year']
         return redirect('roster')
     return render(request, 'byulax/addRoster.html')
+    
+def addStatsPage(request):
+    if request.method == 'POST':
+        new_stat = Stats()
+        new_stat.ground_ball = request.POST['ground_ball']
+        new_stat.goals = request.POST['goals']
+        new_stat.assists = request.POST['assists']
+        new_stat.points = request.POST['points']
+        new_stat.face_offs = request.POST['face_offs']
+        new_stat.player_id_id = request.POST['player_id']
+        new_stat.game_id_id = request.POST['game_id']
+        new_stat.save()
+        return redirect('stats')
+    playerList = Player.objects.all()
+    gameList = Schedule.objects.all()
+    context = {
+        "players" : playerList,
+        "games" : gameList
+    }
+    return render(request, 'byulax/addStats.html', context)
