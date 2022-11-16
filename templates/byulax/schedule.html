@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
 
 <h1>Schedule</h1>
@@ -11,6 +12,7 @@
         <th scope="col">Location</th>
         <th scope="col">Result</th>
         <th scope="col">Info</th>
+        <th scope="col">Delete</th>
       </tr>
     </thead>
     <tbody>
@@ -21,6 +23,7 @@
         <td>{{each.location}}</td>
         <td>{{each.result}}</td>
         <td>{{each.info}}</td>
+        <td><button class="btn"><img src="{% static '/img/trash2.png' %}" style="width: 40px;"></button></td>
       </tr>
       {% endfor %}
     </tbody>
