@@ -47,8 +47,13 @@ def addPlayer(request) :
         new_player.last_name = request.POST['last_name']
         new_player.position = request.POST['position']
         new_player.year = request.POST['year']
+        new_player.save()
         return redirect('roster')
-    return render(request, 'byulax/addRoster.html')
+    data = Player.objects.all()
+    context = {
+        "players": data
+    }
+    return render(request, 'byulax/addRoster.html', context)
     
 def addStatsPage(request):
     if request.method == 'POST':
