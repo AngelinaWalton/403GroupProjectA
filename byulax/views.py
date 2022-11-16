@@ -37,14 +37,14 @@ def addSchedulePage(request):
 
 def addStatsPage(request):
     if request.method == 'POST':
-        new_game = Stats()
-        new_game.ground_ball = request.POST['ground_ball']
-        new_game.goals = request.POST['goals']
-        new_game.assists = request.POST['assists']
-        new_game.points = request.POST['points']
-        new_game.face_offs = request.POST['face_offs']
-        new_game.player_id = request.POST['player_id']
-        new_game.game_id = request.POST['game_id']
-        new_game.save()
+        new_stat = Stats()
+        new_stat.ground_ball = request.POST['ground_ball']
+        new_stat.goals = request.POST['goals']
+        new_stat.assists = request.POST['assists']
+        new_stat.points = request.POST['points']
+        new_stat.face_offs = request.POST['face_offs']
+        new_stat.player_id_id = request.POST['player_id']
+        new_stat.game_id_id = request.POST['game_id']
+        new_stat.save()
         return redirect('stats')
     return render(request, 'byulax/addStats.html')
