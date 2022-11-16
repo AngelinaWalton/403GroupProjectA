@@ -16,7 +16,7 @@ class Player(models.Model):
         (SENIOR, 'Senior'),
         (GRADUATE, 'Graduate'),
     ]
-    year_in_school = models.CharField(
+    year = models.CharField(
         max_length=2,
         choices=YEAR_IN_SCHOOL_CHOICES,
         default=FRESHMAN,
