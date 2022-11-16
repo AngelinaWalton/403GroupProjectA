@@ -19,10 +19,18 @@
         <input type="number" id="face_offs" name="face_offs" required>
         <br><br>
         <label for="player_id">Player ID: </label>
-        <input type="text" id="player_id" name="player_id" required>
+        <select id="player_id" name="player_id" required>
+            {% for each in players %}
+            <option value="{{each.id}}">{{each.first_name}}</option>
+            {% endfor %}
+        </select>
         <br><br>
         <label for="game_id">Game ID: </label>
-        <input type="text" id="game_id" name="game_id" required>
+        <select id="game_id" name="game_id" required>
+            {% for each in games %}
+            <option value="{{each.id}}">{{each.opponent}}</option>
+            {% endfor %}
+        </select>
         <br><br>
         <button type="submit">Submit New Stats</button>
     </form>

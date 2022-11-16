@@ -14,7 +14,11 @@ def rosterPageView(request):
     return render(request, 'byulax/roster.html', context)    
 
 def statsPageView(request):
-    return render(request, 'byulax/stats.html')
+    data = Stats.objects.all()
+    context = {
+        "stats": data
+    }
+    return render(request, 'byulax/stats.html', context)
 
 def schedulePageView(request) :
     data = Schedule.objects.all()
@@ -47,4 +51,10 @@ def addStatsPage(request):
         new_stat.game_id_id = request.POST['game_id']
         new_stat.save()
         return redirect('stats')
-    return render(request, 'byulax/addStats.html')
+    playerList = Player.objects.all()
+    gameList = Schedule.objects.all()
+    context = {
+        "players" : playerList,
+        "games" : gameList
+    }
+    return render(request, 'byulax/addStats.html', context)

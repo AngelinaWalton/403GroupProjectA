@@ -1,4 +1,36 @@
 {% extends 'base.html' %}
 {% block content %}
-<p>stats</p>
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">PlayerID</th>
+        <th scope="col">Ground Balls</th>
+        <th scope="col">Goals</th>
+        <th scope="col">Assists</th>
+        <th scope="col">Points</th>
+        <th scope="col">Face Offs</th>
+        <th scope="col">Goals Against</th>
+        <th scope="col">Saves</th>
+        <th scope="col">Game ID</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for each in stats %}
+      <tr>
+        <td>{{each.player_id_id}}</td>
+        <td>{{each.ground_ball}}</td>
+        <td>{{each.goals}}</td>
+        <td>{{each.assists}}</td>
+        <td>{{each.points}}</td>
+        <td>{{each.face_offs}}</td>
+        <td>{{each.goals_against}}</td>
+        <td>{{each.saves}}</td>
+        <td>{{each.game_id_id}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+<br><br>
+<a type="button" href="{% url 'addStats' %}" class="btn btn-secondary">Add Stats</a>
 {% endblock %}
