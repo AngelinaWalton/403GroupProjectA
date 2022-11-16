@@ -15,11 +15,15 @@
         <tr>
             <td>{{each.first_name}}</td>
             <td>{{each.last_name}}</td>
-            <td>{{each.year_in_school}}</td>
+            <td>{{each.year}}</td>
             <td>{{each.position}}</td>
             <td>{{each.player_number}}</td>
         </tr>
         {% endfor %}
     </tbody>
 </table>
+
+<form action="{% url 'addRoster' %}" method="get">
+    <button type="Submit" >Add Player</button>
+</form>
 {% endblock %}
