@@ -7,6 +7,7 @@
 <table class="table">
     <thead>
       <tr>
+        <th scope="col" hidden>ID</th>
         <th scope="col">Date/Time</th>
         <th scope="col">Opponent</th>
         <th scope="col">Location</th>
@@ -23,7 +24,11 @@
         <td>{{each.location}}</td>
         <td>{{each.result}}</td>
         <td>{{each.info}}</td>
-        <td><button class="btn"><img src="{% static '/img/trash2.png' %}" style="width: 40px;"></button></td>
+        <form id="form{{each.id}}" method="POST" action="{% url 'deleteSchedule' %}">
+          {% csrf_token %}
+          <td hidden><input type="hidden" name="id" id="id{{each.id}}" value="{{each.id}}"></td>
+          <td><button type="submit" class="btn"><img src="{% static '/img/trash2.png' %}" style="width: 40px;"></button></td>
+        </form>
       </tr>
       {% endfor %}
     </tbody>

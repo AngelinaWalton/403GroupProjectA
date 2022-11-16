@@ -96,6 +96,16 @@ def addSchedulePage(request):
         return redirect('schedule')
     return render(request, 'byulax/addSchedule.html')
     
+
+def deleteSchedule(request):
+    if request.method == "POST":
+        try:
+            scd = Schedule.objects.get(id = request.POST['id']).delete()
+            return redirect('schedule')
+        except:
+            return HttpResponse("Sorry, this game cannot be deleted as there are stats associated with it.")
+            
+    return "done"
 # END SCHEDULE FUNCTIONS #
 ##########################
 
