@@ -40,8 +40,12 @@ def addPlayer(request) :
 
 def deletePlayer(request):
     if request.method == "POST":
-        stat = Player.objects.get(id = request.POST['id']).delete()
-        return redirect('roster')
+        try:
+            stat = Player.objects.get(id = request.POST['id']).delete()
+            return redirect('roster')
+        except:
+            return HttpResponse("Sorry, this player cannot be deleted because there are stats associated with them.")
+
     return  HttpResponse("Something didn't work right, please try again.")
 
 # ENG ROSTER FUNCTIONS #
