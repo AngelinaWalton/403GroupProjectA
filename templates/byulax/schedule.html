@@ -25,4 +25,11 @@
       {% endfor %}
     </tbody>
   </table>
+
+<form action="{% url 'addSchedule' %}" method="get">
+  <button type="Submit" >Add A Game</button>
+</form>
+
+<br>
+<a class="btn" href="{% url 'addSchedule' %}">Add Game</a>
 {% endblock %}

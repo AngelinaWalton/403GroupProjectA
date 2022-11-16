@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+<fieldset>
+    <form id="formAddStats" method="POST">
+        {% csrf_token %}
+        <label for="ground_ball">Ground Ball: </label>
+        <input type="number" id="ground_ball" name="ground_ball" required>
+        <br><br>
+        <label for="goals">Goals:</label>
+        <input type="number" id="goals" name= "goals" required>
+        <br><br>
+        <label for="assists">Assists: </label>
+        <input type="number" id="assists" name="assists" required>
+        <br><br>
+        <label for="points">Points: </label>
+        <input type="number" id="points" value="0-0" name="points" required>
+        <br><br>
+        <label for="face_offs">Face Offs: </label>
+        <input type="number" id="face_offs" name="face_offs" required>
+        <br><br>
+        <label for="player_id">Player ID: </label>
+        <input type="text" id="player_id" name="player_id" required>
+        <br><br>
+        <label for="game_id">Game ID: </label>
+        <input type="text" id="game_id" name="game_id" required>
+        <br><br>
+        <button type="submit">Submit New Stats</button>
+    </form>
+</fieldset>
+{% endblock %}
