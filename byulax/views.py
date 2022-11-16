@@ -3,8 +3,17 @@ from django.http import HttpResponse
 from .models import *
 
 # Create your views here.
+###################
+# INDEX FUNCTIONS #
+
 def indexPageView(request) :
     return render(request, 'byulax/index.html')
+
+# END INDEX FUNCTIONS #
+#######################
+
+###################
+# ROSTER FUNCTIONS#
 
 def rosterPageView(request):
     data = Player.objects.all()
@@ -12,32 +21,6 @@ def rosterPageView(request):
         "player": data
     }
     return render(request, 'byulax/roster.html', context)    
-
-def statsPageView(request):
-    data = Stats.objects.all()
-    context = {
-        "stats": data
-    }
-    return render(request, 'byulax/stats.html', context)
-
-def schedulePageView(request) :
-    data = Schedule.objects.all()
-    context = {
-        "game" : data
-    }
-    return render(request, 'byulax/schedule.html', context)
-
-def addSchedulePage(request):
-    if request.method == 'POST':
-        new_game = Schedule()
-        new_game.date_time = request.POST['date']
-        new_game.location = request.POST['location']
-        new_game.opponent = request.POST['opponent']
-        new_game.result = request.POST['result']
-        new_game.info = request.POST['info']
-        new_game.save()
-        return redirect('schedule')
-    return render(request, 'byulax/addSchedule.html')
 
 def addPlayer(request) :
     if request.method == 'POST' :
@@ -54,7 +37,20 @@ def addPlayer(request) :
         "players": data
     }
     return render(request, 'byulax/addRoster.html', context)
-    
+
+# ENG ROSTER FUNCTIONS #
+########################
+
+###################
+# STATS FUNCTIONS #
+
+def statsPageView(request):
+    data = Stats.objects.all()
+    context = {
+        "stats": data
+    }
+    return render(request, 'byulax/stats.html', context)
+
 def addStatsPage(request):
     if request.method == 'POST':
         new_stat = Stats()
@@ -74,3 +70,34 @@ def addStatsPage(request):
         "games" : gameList
     }
     return render(request, 'byulax/addStats.html', context)
+
+# END STATS FUNCTIONS #
+#######################
+
+######################
+# SCHEDULE FUNCTIONS #
+
+def schedulePageView(request) :
+    data = Schedule.objects.all()
+    context = {
+        "game" : data
+    }
+    return render(request, 'byulax/schedule.html', context)
+
+def addSchedulePage(request):
+    if request.method == 'POST':
+        new_game = Schedule()
+        new_game.date_time = request.POST['date']
+        new_game.location = request.POST['location']
+        new_game.opponent = request.POST['opponent']
+        new_game.result = request.POST['result']
+        new_game.info = request.POST['info']
+        new_game.save()
+        return redirect('schedule')
+    return render(request, 'byulax/addSchedule.html')
+    
+# END SCHEDULE FUNCTIONS #
+##########################
+
+    
+
