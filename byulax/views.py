@@ -42,7 +42,7 @@ def deletePlayer(request):
     if request.method == "POST":
         stat = Player.objects.get(id = request.POST['id']).delete()
         return redirect('roster')
-    return  "done"
+    return  HttpResponse("Something didn't work right, please try again.")
 
 # ENG ROSTER FUNCTIONS #
 ########################
@@ -81,7 +81,7 @@ def deleteStats(request):
     if request.method == "POST":
         stat = Stats.objects.get(id = request.POST['id']).delete()
         return redirect('stats')
-    return  "done"
+    return  HttpResponse("Something didn't work right, please try again.")
 
 # END STATS FUNCTIONS #
 #######################
@@ -117,7 +117,7 @@ def deleteSchedule(request):
         except:
             return HttpResponse("Sorry, this game cannot be deleted as there are stats associated with it.")
             
-    return "done"
+    return HttpResponse("Something went wrong, please try again.")
 # END SCHEDULE FUNCTIONS #
 ##########################
 
