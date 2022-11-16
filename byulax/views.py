@@ -38,6 +38,12 @@ def addPlayer(request) :
     }
     return render(request, 'byulax/addRoster.html', context)
 
+def deletePlayer(request):
+    if request.method == "POST":
+        stat = Player.objects.get(id = request.POST['id']).delete()
+        return redirect('roster')
+    return  "done"
+
 # ENG ROSTER FUNCTIONS #
 ########################
 
@@ -70,6 +76,12 @@ def addStatsPage(request):
         "games" : gameList
     }
     return render(request, 'byulax/addStats.html', context)
+
+def deleteStats(request):
+    if request.method == "POST":
+        stat = Stats.objects.get(id = request.POST['id']).delete()
+        return redirect('stats')
+    return  "done"
 
 # END STATS FUNCTIONS #
 #######################

@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
 
 <table class="table">
@@ -13,6 +14,7 @@
         <th scope="col">Goals Against</th>
         <th scope="col">Saves</th>
         <th scope="col">Game ID</th>
+        <th scope="col">Delete</th>
       </tr>
     </thead>
     <tbody>
@@ -27,6 +29,11 @@
         <td>{{each.goals_against}}</td>
         <td>{{each.saves}}</td>
         <td>{{each.game_id_id}}</td>
+        <form id="statsForm{{each.id}}" method="POST" action="{% url 'deleteStats' %}">
+          {% csrf_token %}
+          <td hidden><input type="hidden" name="id" id="id{{each.id}}" value="{{each.id}}"></td>
+          <td><button type="submit" class="btn"><img src="{% static '/img/trash2.png' %}" style="width: 40px;"></button></td>
+        </form>
       </tr>
       {% endfor %}
     </tbody>
