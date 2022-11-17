@@ -20,15 +20,15 @@
     <tbody>
       {% for each in stats %}
       <tr>
-        <td>{{each.player_id_id}}</td>
-        <td>{{each.ground_ball}}</td>
-        <td>{{each.goals}}</td>
-        <td>{{each.assists}}</td>
-        <td>{{each.points}}</td>
-        <td>{{each.face_offs}}</td>
-        <td>{{each.goals_against}}</td>
-        <td>{{each.saves}}</td>
-        <td>{{each.game_id_id}}</td>
+        <td  id = "td{{each.player_id_id}}id">{{each.player_id_id}}</td>
+        <td id = "td{{each.player_id_id}}ground_ball">{{each.ground_ball}}</td>
+        <td id = "td{{each.player_id_id}}goals">{{each.goals}}</td>
+        <td id = "td{{each.player_id_id}}assists">{{each.assists}}</td>
+        <td id = "td{{each.player_id_id}}points">{{each.points}}</td>
+        <td id = "td{{each.player_id_id}}face_offs">{{each.face_offs}}</td>
+        <td id = "td{{each.player_id_id}}goals_against">{{each.goals_against}}</td>
+        <td id = "td{{each.player_id_id}}saves">{{each.saves}}</td>
+        <td id = "td{{each.player_id_id}}game_id">{{each.game_id_id}}</td>
         <form id="statsForm{{each.id}}" method="POST" action="{% url 'deleteStats' %}">
           {% csrf_token %}
           <td hidden><input type="hidden" name="id" id="id{{each.id}}" value="{{each.id}}"></td>
@@ -38,10 +38,36 @@
           <td hidden><input type="hidden" name="id" id="id{{each.id}}" value="{{each.id}}"></td>
           <td><button type="submit" class="btn">Edit</button></td>
         </form>
+        <td id="editbtn{{each.id}}"><button onclick="changeToInput">Edit</button>
       </tr>
       {% endfor %}
     </tbody>
   </table>
+
+  <script>
+    function changeToInput(rownum) {
+      playerid = document.getElementById("td" + rownum + "id").innerHTML 
+      gb= document.getElementById("td" + rownum + "ground_ball").innerHTML 
+      goals= document.getElementById("td" + rownum + "goals").innerHTML 
+      assists = document.getElementById("td" + rownum + "assists").innerHTML 
+      points = document.getElementById("td" + rownum + "points").innerHTML 
+      fo = document.getElementById("td" + rownum + "face_offs").innerHTML 
+      ga = document.getElementById("td" + rownum + "goals_against").innerHTML 
+      saves = document.getElementById("td" + rownum + "saves").innerHTML 
+      game_id = document.getElementById("td" + rownum + "game_id").innerHTML
+
+      document.getElementById("td" + rownum + "id").innerHTML = "<input type='text' name='id' value = '" + playerid +"''>"
+      document.getElementById("td" + rownum + "ground_ball").innerHTML = "<input type='text' name='ground_ball' value = '" + gb +"''>"
+      document.getElementById("td" + rownum + "goals").innerHTML = "<input type='text' name='goals' value = " + goals +">"
+      document.getElementById("td" + rownum + "assists").innerHTML = "<input type='text' name='assists'>"
+      document.getElementById("td" + rownum + "points").innerHTML = "<input type='text' name='points'>"
+      document.getElementById("td" + rownum + "face_offs").innerHTML = "<input type='text' name='face_offs'>"
+      document.getElementById("td" + rownum + "goals_against").innerHTML = "<input type='text' name='goals_against'>"
+      document.getElementById("td" + rownum + "saves").innerHTML = "<input type='text' name='saves'>"
+      document.getElementById("td" + rownum + "game_id").innerHTML = "<input type='text' name='game_id'>"
+      document.getElementById("editbtn" + rownum).innerHTML = "<button type='submit' class='btn' form='editFrom" + rownum + "' </button>"
+    } ;
+  </script>
 <br><br>
 <a type="button" href="{% url 'addStats' %}" class="btn btn-secondary">Add Stats</a>
 {% endblock %}
