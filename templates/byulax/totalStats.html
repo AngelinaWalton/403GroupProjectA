@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">PlayerID</th>
+        <th scope="col">Ground Balls</th>
+        <th scope="col">Goals</th>
+        <th scope="col">Assists</th>
+        <th scope="col">Points</th>
+        <th scope="col">Face Offs</th>
+        <th scope="col">Goals Against</th>
+        <th scope="col">Saves</th>
+        <th scope="col">APG</th>
+        <th scope="col">GPG</th>
+        <th scope="col">PPG</th>
+        <th scope="col">GAA</th>
+        <th scope="col">SPG</th>
+        <th scope="col">Game ID</th>
+        <th scope="col">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for each in totalStats %}
+        <tr>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+
+{% endblock %}

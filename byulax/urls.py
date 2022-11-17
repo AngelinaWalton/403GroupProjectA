@@ -6,6 +6,7 @@ urlpatterns = [
     path('roster/', rosterPageView, name = 'roster'),
     path('roster/add/',addPlayer, name="addRoster"),
     path('roster/delete/', deletePlayer, name="deletePlayer"),
+    path('roster/edit/', editPlayer, name="editPlayer"),
     path('schedule/', schedulePageView, name = 'schedule'),
     path('schedule/add/', addSchedulePage, name= 'addSchedule'),
     path('schedule/delete/', deleteSchedule, name="deleteSchedule"),

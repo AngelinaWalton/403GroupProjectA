@@ -34,6 +34,10 @@
           <td hidden><input type="hidden" name="id" id="id{{each.id}}" value="{{each.id}}"></td>
           <td><button type="submit" class="btn"><img src="{% static '/img/trash2.png' %}" style="width: 40px;"></button></td>
         </form>
+        <form id="statsForm{{each.id}}" method="POST" action="{% url 'editStats' %}">
+          <td hidden><input type="hidden" name="id" id="id{{each.id}}" value="{{each.id}}"></td>
+          <td><button type="submit" class="btn">Edit</button></td>
+        </form>
       </tr>
       {% endfor %}
     </tbody>
