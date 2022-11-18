@@ -123,7 +123,9 @@ def editStats(request):
 # SCHEDULE FUNCTIONS #
 
 def schedulePageView(request) :
-    data = Schedule.objects.all()
+    data = Schedule.objects.all().order_by("date_time")
+    for each in data:
+        print(each.date_time)
     context = {
         "game" : data
     }
@@ -143,14 +145,15 @@ def addSchedulePage(request):
 
 def editSchedule(request):
     if request.method == "POST":
-        schedule = Schedule.object.get(date_time = 'date_time', opponent = 'opponent', location = 'location', result = 'result', info = 'info',)
-        new_game = Schedule()
-        new_game.date_time = request.GET['date_time']
-        new_game.opponent = request.GET['opponent']
-        new_game.location = request.GET['location']
-        new_game.result = request.GET['result']
-        new_game.info = request.GET['info']
-        new_game.save()
+        editSchedule = Schedule.objects.get(id=request.POST["id"])
+        editSchedule.date_time = request.POST['date_time']
+        editSchedule.opponent = request.POST['opponent']
+        editSchedule.location = request.POST['location']
+        editSchedule.result = request.POST['result']
+        editSchedule.info = request.POST['info']
+        editSchedule.save()
+        return redirect('schedule')
+    return HttpResponse('Error')
     
 
 def deleteSchedule(request):
