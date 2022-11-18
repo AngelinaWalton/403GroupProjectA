@@ -14,4 +14,5 @@ urlpatterns = [
     path('stats/', statsPageView, name = 'stats'),
     path('stats/add/', addStatsPage, name = "addStats"),
     path('stats/delete/', deleteStats, name="deleteStats"),
+    path("stats/totals", totalStats, name="totalStats"),
 ]

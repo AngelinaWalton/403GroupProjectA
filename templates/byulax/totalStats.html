@@ -5,7 +5,7 @@
 <table class="table">
     <thead>
       <tr>
-        <th scope="col">PlayerID</th>
+        <th scope="col">PlayerNumber</th>
         <th scope="col">Ground Balls</th>
         <th scope="col">Goals</th>
         <th scope="col">Assists</th>
@@ -18,15 +18,28 @@
         <th scope="col">PPG</th>
         <th scope="col">GAA</th>
         <th scope="col">SPG</th>
-        <th scope="col">Game ID</th>
         <th scope="col">Delete</th>
       </tr>
     </thead>
     <tbody>
         {% for each in totalStats %}
         <tr>
-            <td></td>
+            <td>{{each.player_id_id__player_number}}</td>
+            <td>{{each.totGb}}</td>
+            <td>{{each.totGoals}}</td>
+            <td>{{each.totAssists}}</td>
+            <td>{{each.totPoints}}</td>
+            <td>{{each.totAssists}}</td>
+            <td>{{each.totGoals_against}}</td>
+            <td>{{each.totSaves}}</td>
+            <td>{{each.avgAPG}}</td>
+            <td>{{each.avgGPG}}</td>
+            <td>{{each.avgPPG}}</td>
+            <td>{{each.avgGAA}}</td>
+            <td>{{each.avgSPG}}</td>
+            <td><img src="{%static '/img/trash2.png'%}" style="height: 30px;"></td>
         </tr>
+        {%endfor%}
     </tbody>
 </table>
 

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from django.db.models import Avg
+from django.db.models import Avg, Sum
 from .models import *
 
 # Create your views here.
@@ -104,7 +104,7 @@ def deleteStats(request):
     return  HttpResponse("Something didn't work right, please try again.")
 
 def totalStats(request):
-    data = Stats.objects.values("player_id_id").annotate(totGb = sum('ground_ball'), totGoals = sum('goals'), totAssists = (sum('assists')), totPoints = sum('points'), totFaces = sum("face_offs"), totGoals_againts = sum('goals_against'), totSaves = sum('saves'), avgAPG = Avg('assists'), avgGPG = Avg('goals'), avgPPG = Avg('points'), avgGAA = Avg('goals_against'), avgSPG = Avg('saves'))
+    data = Stats.objects.values("player_id_id", 'player_id_id__player_number').annotate(totGb = Sum('ground_ball'), totGoals = Sum('goals'), totAssists = Sum('assists'), totPoints = Sum('points'), totFaces = Sum("face_offs"), totGoals_against = Sum('goals_against'), totSaves = Sum('saves'), avgAPG = Avg('assists'), avgGPG = Avg('goals'), avgPPG = Avg('points'), avgGAA = Avg('goals_against'), avgSPG = Avg('saves'))
     context = {
         'totalStats': data
     }
