@@ -15,30 +15,31 @@
         <th scope="col">Saves</th>
         <th scope="col">Game ID</th>
         <th scope="col">Delete</th>
+        <th scope="col">Edit</th>
       </tr>
     </thead>
     <tbody>
       {% for each in stats %}
       <tr>
-        <td  id = "td{{each.player_id_id}}id">{{each.player_id_id}}</td>
-        <td id = "td{{each.player_id_id}}ground_ball">{{each.ground_ball}}</td>
-        <td id = "td{{each.player_id_id}}goals">{{each.goals}}</td>
-        <td id = "td{{each.player_id_id}}assists">{{each.assists}}</td>
-        <td id = "td{{each.player_id_id}}points">{{each.points}}</td>
-        <td id = "td{{each.player_id_id}}face_offs">{{each.face_offs}}</td>
-        <td id = "td{{each.player_id_id}}goals_against">{{each.goals_against}}</td>
-        <td id = "td{{each.player_id_id}}saves">{{each.saves}}</td>
-        <td id = "td{{each.player_id_id}}game_id">{{each.game_id_id}}</td>
+        <td  id = "td{{each.id}}id">{{each.player_id_id}}</td>
+        <td id = "td{{each.id}}ground_ball">{{each.ground_ball}}</td>
+        <td id = "td{{each.id}}goals">{{each.goals}}</td>
+        <td id = "td{{each.id}}assists">{{each.assists}}</td>
+        <td id = "td{{each.id}}points">{{each.points}}</td>
+        <td id = "td{{each.id}}face_offs">{{each.face_offs}}</td>
+        <td id = "td{{each.id}}goals_against">{{each.goals_against}}</td>
+        <td id = "td{{each.id}}saves">{{each.saves}}</td>
+        <td id = "td{{each.id}}game_id">{{each.game_id_id}}</td>
         <form id="statsForm{{each.id}}" method="POST" action="{% url 'deleteStats' %}">
           {% csrf_token %}
           <td hidden><input type="hidden" name="id" id="id{{each.id}}" value="{{each.id}}"></td>
           <td><button type="submit" class="btn"><img src="{% static '/img/trash2.png' %}" style="width: 40px;"></button></td>
         </form>
-        <form id="statsForm{{each.id}}" method="POST" action="{% url 'editStats' %}">
+        <form id="editForm{{each.id}}" method="POST" action="{% url 'editStats' %}">
+          {%csrf_token%}
           <td hidden><input type="hidden" name="id" id="id{{each.id}}" value="{{each.id}}"></td>
-          <td><button type="submit" class="btn">Edit</button></td>
         </form>
-        <td id="editbtn{{each.id}}"><button onclick="changeToInput">Edit</button>
+        <td id="editbtn{{each.id}}"><button onclick="changeToInput('{{each.id}}')" class="btn"><img src="{% static '/img/pencil.png'%}" style="width: 30px;"></button>
       </tr>
       {% endfor %}
     </tbody>
@@ -56,17 +57,17 @@
       saves = document.getElementById("td" + rownum + "saves").innerHTML 
       game_id = document.getElementById("td" + rownum + "game_id").innerHTML
 
-      document.getElementById("td" + rownum + "id").innerHTML = "<input type='text' name='id' value = '" + playerid +"''>"
-      document.getElementById("td" + rownum + "ground_ball").innerHTML = "<input type='text' name='ground_ball' value = '" + gb +"''>"
-      document.getElementById("td" + rownum + "goals").innerHTML = "<input type='text' name='goals' value = " + goals +">"
-      document.getElementById("td" + rownum + "assists").innerHTML = "<input type='text' name='assists'>"
-      document.getElementById("td" + rownum + "points").innerHTML = "<input type='text' name='points'>"
-      document.getElementById("td" + rownum + "face_offs").innerHTML = "<input type='text' name='face_offs'>"
-      document.getElementById("td" + rownum + "goals_against").innerHTML = "<input type='text' name='goals_against'>"
-      document.getElementById("td" + rownum + "saves").innerHTML = "<input type='text' name='saves'>"
-      document.getElementById("td" + rownum + "game_id").innerHTML = "<input type='text' name='game_id'>"
-      document.getElementById("editbtn" + rownum).innerHTML = "<button type='submit' class='btn' form='editFrom" + rownum + "' </button>"
-    } ;
+      // document.getElementById("td" + rownum + "id").innerHTML = "<input type='text' name='id' value = '" + playerid +"' form='editForm" + rownum + "'>"
+      document.getElementById("td" + rownum + "ground_ball").innerHTML = "<input type='number' name='ground_ball' value = '" + gb +"' form='editForm" + rownum + "' style='width: 4em'>"
+      document.getElementById("td" + rownum + "goals").innerHTML = "<input type='number' name='goals' value = " + goals +" form='editForm" + rownum + "' style='width: 4em'>"
+      document.getElementById("td" + rownum + "assists").innerHTML = "<input type='number' name='assists' value = "+assists+" form='editForm" + rownum + "' style='width: 4em'>"
+      document.getElementById("td" + rownum + "points").innerHTML = "<input type='number' name='points' value = "+points+" form='editForm" + rownum + "' style='width: 4em'>"
+      document.getElementById("td" + rownum + "face_offs").innerHTML = "<input type='number' name='face_offs' value="+fo+" form='editForm" + rownum + "' style='width: 4em'>"
+      document.getElementById("td" + rownum + "goals_against").innerHTML = "<input type='number' name='goals_against' value="+ga+" form='editForm" + rownum + "' style='width: 4em'>"
+      document.getElementById("td" + rownum + "saves").innerHTML = "<input type='number' name='saves' value="+saves+" form='editForm" + rownum + "' style='width: 4em'>"
+      // document.getElementById("td" + rownum + "game_id").innerHTML = "<input type='text' name='game_id' value="+game_id+" form='editForm" + rownum + "'>"
+      document.getElementById("editbtn" + rownum).innerHTML = "<button type='submit' class='btn' form='editForm" + rownum + "'>Submit</button>"
+    }
   </script>
 <br><br>
 <a type="button" href="{% url 'addStats' %}" class="btn btn-secondary">Add Stats</a>

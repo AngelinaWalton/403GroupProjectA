@@ -15,4 +15,5 @@ urlpatterns = [
     path('stats/add/', addStatsPage, name = "addStats"),
     path('stats/delete/', deleteStats, name="deleteStats"),
     path("stats/totals", totalStats, name="totalStats"),
+    path('stats/edit/', editStats, name="editStats")
 ]

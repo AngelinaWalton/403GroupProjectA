@@ -52,15 +52,13 @@ def deletePlayer(request):
 def editPlayer(request) :
     if request.method == "POST":
         player = Player.objects.get(id = request.POST['id'])
-        print(request.POST)
-
-        new_player = Player.objects.get(id= request.POST['id'])
-        new_player.player_number = request.POST['player_number']
-        new_player.first_name = request.POST['first_name']
-        new_player.last_name = request.POST['last_name']
-        new_player.position = request.POST['position']
-        new_player.year = request.POST['year']
-        new_player.save()
+        player = Player.objects.get(id= request.POST['id'])
+        player.player_number = request.POST['player_number']
+        player.first_name = request.POST['first_name']
+        player.last_name = request.POST['last_name']
+        player.position = request.POST['position']
+        player.year = request.POST['year']
+        player.save()
         return redirect("roster")
     return HttpResponse("Error")
 
@@ -71,7 +69,7 @@ def editPlayer(request) :
 # STATS FUNCTIONS #
 
 def statsPageView(request):
-    data = Stats.objects.all()
+    data = Stats.objects.all().order_by("player_id_id")
     context = {
         "stats": data
     }
@@ -113,7 +111,14 @@ def totalStats(request):
 def editStats(request):
     if request.method == "POST":
         stat = Stats.objects.get(id = request.POST['id'])
-
+        stat.ground_ball = request.POST['ground_ball']
+        stat.goals = request.POST['goals']
+        stat.assists = request.POST['assists']
+        stat.points = request.POST['points']
+        stat.face_offs = request.POST['face_offs']
+        stat.goals_against = request.POST['goals_against']
+        stat.saves = request.POST['saves']
+        stat.save()
         return redirect('stats')
 
 # END STATS FUNCTIONS #
