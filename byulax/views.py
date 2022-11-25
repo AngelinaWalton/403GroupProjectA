@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.db.models import Avg, Sum
 from .models import *
 
 # Create your views here.
@@ -16,7 +17,7 @@ def indexPageView(request) :
 # ROSTER FUNCTIONS#
 
 def rosterPageView(request):
-    data = Player.objects.all()
+    data = Player.objects.all().order_by("id")
     context = {
         "player": data
     }
@@ -48,14 +49,27 @@ def deletePlayer(request):
 
     return  HttpResponse("Something didn't work right, please try again.")
 
-# ENG ROSTER FUNCTIONS #
+def editPlayer(request) :
+    if request.method == "POST":
+        player = Player.objects.get(id = request.POST['id'])
+        player = Player.objects.get(id= request.POST['id'])
+        player.player_number = request.POST['player_number']
+        player.first_name = request.POST['first_name']
+        player.last_name = request.POST['last_name']
+        player.position = request.POST['position']
+        player.year = request.POST['year']
+        player.save()
+        return redirect("roster")
+    return HttpResponse("Error")
+
+# END ROSTER FUNCTIONS #
 ########################
 
 ###################
 # STATS FUNCTIONS #
 
 def statsPageView(request):
-    data = Stats.objects.all()
+    data = Stats.objects.select_related('player_id', 'game_id').all().order_by("player_id_id")
     context = {
         "stats": data
     }
@@ -87,6 +101,26 @@ def deleteStats(request):
         return redirect('stats')
     return  HttpResponse("Something didn't work right, please try again.")
 
+def totalStats(request):
+    data = Stats.objects.values("player_id_id", "player_id_id__first_name", "player_id_id__last_name", 'player_id_id__player_number').annotate(totGb = Sum('ground_ball'), totGoals = Sum('goals'), totAssists = Sum('assists'), totPoints = Sum('points'), totFaces = Sum("face_offs"), totGoals_against = Sum('goals_against'), totSaves = Sum('saves'), avgAPG = Avg('assists'), avgGPG = Avg('goals'), avgPPG = Avg('points'), avgGAA = Avg('goals_against'), avgSPG = Avg('saves')).order_by('player_id_id')
+    context = {
+        'totalStats': data
+    }
+    return render(request, 'byulax/totalStats.html', context)
+
+def editStats(request):
+    if request.method == "POST":
+        stat = Stats.objects.get(id = request.POST['id'])
+        stat.ground_ball = request.POST['ground_ball']
+        stat.goals = request.POST['goals']
+        stat.assists = request.POST['assists']
+        stat.points = request.POST['points']
+        stat.face_offs = request.POST['face_offs']
+        stat.goals_against = request.POST['goals_against']
+        stat.saves = request.POST['saves']
+        stat.save()
+        return redirect('stats')
+
 # END STATS FUNCTIONS #
 #######################
 
@@ -94,7 +128,9 @@ def deleteStats(request):
 # SCHEDULE FUNCTIONS #
 
 def schedulePageView(request) :
-    data = Schedule.objects.all()
+    data = Schedule.objects.all().order_by("date_time")
+    for each in data:
+        print(each.date_time)
     context = {
         "game" : data
     }
@@ -111,6 +147,18 @@ def addSchedulePage(request):
         new_game.save()
         return redirect('schedule')
     return render(request, 'byulax/addSchedule.html')
+
+def editSchedule(request):
+    if request.method == "POST":
+        editSchedule = Schedule.objects.get(id=request.POST["id"])
+        editSchedule.date_time = request.POST['date_time']
+        editSchedule.opponent = request.POST['opponent']
+        editSchedule.location = request.POST['location']
+        editSchedule.result = request.POST['result']
+        editSchedule.info = request.POST['info']
+        editSchedule.save()
+        return redirect('schedule')
+    return HttpResponse('Error')
     
 
 def deleteSchedule(request):
