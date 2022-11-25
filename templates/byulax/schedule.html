@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
 
 <h1>Schedule</h1>
@@ -6,23 +7,60 @@
 <table class="table">
     <thead>
       <tr>
+        <th scope="col" hidden>ID</th>
         <th scope="col">Date/Time</th>
         <th scope="col">Opponent</th>
         <th scope="col">Location</th>
         <th scope="col">Result</th>
         <th scope="col">Info</th>
+        <th scope="col">Delete</th>
+        <th scope="col">Edit</th>
       </tr>
     </thead>
     <tbody>
       {% for each in game %}
-      <tr>
-        <td>{{each.date_time}}</td>
-        <td>{{each.opponent}}</td>
-        <td>{{each.location}}</td>
-        <td>{{each.result}}</td>
-        <td>{{each.info}}</td>
+      
+      <tr style="height: 50px;">
+        <td id='td{{each.id}}date_time'>{{each.date_time}}</td>
+        <td id='td{{each.id}}opponent'>{{each.opponent}}</td>
+        <td id='td{{each.id}}location'>{{each.location}}</td>
+        <td id='td{{each.id}}result'>{{each.result}}</td>
+        <td id='td{{each.id}}info'>{{each.info}}</td>
+        <td hidden><input type="hidden" name="id" id="id{{each.id}}" value="{{each.id}}" form="editSchedule{{each.id}}"></td>
+        <form id="form{{each.id}}" method="POST" action="{% url 'deleteSchedule' %}">
+          {% csrf_token %}
+          <td hidden><input type="hidden" name="id" id="id{{each.id}}" value="{{each.id}}"></td>
+          <td><button type="submit" class="btn"><img src="{% static '/img/trash2.png'%}" style="width: 30px;"></button></td>
+        </form>
+        <td id="editbtn{{each.id}}"><button onclick="changeToInput('{{each.id}}')" class="btn"><img src="{% static '/img/pencil.png'%}" style="width: 30px; height: 30px;"></button></td>
+        <td hidden>
+          <form id="editSchedule{{each.id}}" method="POST" action="{% url 'editSchedule' %}">
+            {% csrf_token %} 
+          </form>
+        </td>
       </tr>
+
       {% endfor %}
     </tbody>
   </table>
+
+<form action="{% url 'addSchedule' %}" method="get">
+  <button type="Submit" class="btn btn-primary">Add A Game</button>
+</form>
+<script>
+  function changeToInput(rowNum){
+    date_time = document.getElementById("td" + rowNum + "date_time").innerHTML
+    opponent = document.getElementById("td" + rowNum + "opponent").innerHTML
+    sLocation = document.getElementById("td" + rowNum + "location").innerHTML
+    result = document.getElementById("td" + rowNum + "result").innerHTML
+    info = document.getElementById("td" + rowNum + "info").innerHTML
+
+    document.getElementById("td" + rowNum + "date_time").innerHTML = "<input required type='datetime-local' name='date_time' value= '"+ date_time + "' form='editSchedule" + rowNum  + "'>"
+    document.getElementById("td" + rowNum + "opponent").innerHTML = "<input required type='text' name='opponent' value= '"+ opponent + "' form='editSchedule" + rowNum  + "'>"
+    document.getElementById("td" + rowNum + "location").innerHTML = "<input required type='text' name='location' value= '"+ sLocation + "'form='editSchedule" + rowNum  + "'>"
+    document.getElementById("td" + rowNum + "result").innerHTML = "<input required type='text' name='result' value= '"+ result + "'form='editSchedule" + rowNum  + "'>"
+    document.getElementById("td" + rowNum + "info").innerHTML = "<input type='text' name='info' value= '"+ info + "'form='editSchedule" + rowNum  + "'>"
+    document.getElementById("editbtn" + rowNum).innerHTML = "<button type ='submit' class='btn btn-secondary' form='editSchedule" + rowNum + "' >Submit</button"
+  }
+</script> 
 {% endblock %}

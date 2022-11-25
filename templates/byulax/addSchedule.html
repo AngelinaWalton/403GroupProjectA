@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+<fieldset>
+    <form id="formAddRoster" method="POST">
+        {% csrf_token %}
+        <label for="date">Game Date and Time: </label>
+        <input type="datetime-local" id="date" name="date" required>
+        <br><br>
+        <label for="location">Location:</label>
+        <input type="text" id="location" name= "location" required>
+        <br><br>
+        <label for="opponent">Opponent: </label>
+        <input type="text" id="opponent" name="opponent" required>
+        <br><br>
+        <label for="result">Result: </label>
+        <input type="text" id="result" value="0-0" name="result" required>
+        <br><br>
+        <label for="info">Info: </label>
+        <textarea id="info" rows="4" cols="35" name="info"></textarea>
+        <br><br>
+        <button type="submit">Submit New Game</button>
+    </form>
+</fieldset>
+{% endblock %}

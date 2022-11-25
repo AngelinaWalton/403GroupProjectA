@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
 <table class="table">
     <thead>
@@ -8,18 +9,64 @@
             <th scope="col">Year</th>
             <th scope="col">Position</th>
             <th scope="col">Number</th>
+            <th scope="col">Delete</th>
+            <th scope="col">Edit</th>
         </tr>
     </thead>
     <tbody>
         {% for each in player %}
-        <tr>
-            <td>{{each.first_name}}</td>
-            <td>{{each.last_name}}</td>
-            <td>{{each.year_in_school}}</td>
-            <td>{{each.position}}</td>
-            <td>{{each.player_number}}</td>
-        </tr>
+            
+            <tr>
+                
+                
+                <input hidden type="text" name="test" value="test">
+                <td id= "td{{each.id}}fName" name ="td{{each.id}}fName" >{{each.first_name}}</td>
+                <td id= "td{{each.id}}lName" name="td{{each.id}}lName">{{each.last_name}}</td>
+                <td id="td{{each.id}}year" name="td{{each.id}}year">{{each.year}}</td>
+                <td id= "td{{each.id}}position" name="td{{each.id}}position">{{each.position}}</td>
+                <td id= "td{{each.id}}number" name ="td{{each.id}}number">{{each.player_number}}</td>
+                <td hidden><input type="hidden" name="id" id="id{{each.id}}" value="{{each.id}}" form="editForm{{each.id}}"></td>
+                <form id="rosterForm{{each.id}}" method="POST" action="{% url 'deletePlayer' %}">
+                    {% csrf_token %}
+                    <td hidden><input type="hidden" name="id" id="id{{each.id}}" value="{{each.id}}"></td>
+                    <td><button type="submit" class="btn"><img src="{% static '/img/trash2.png' %}" style="width: 30px;"></button></td>
+                </form>
+                <td id="editbtn{{each.id}}"><button  onclick="changeToInput('{{each.id}}')" class="btn"><img src="{%static '/img/pencil.png'%}" style="width: 30px; height: 30px;"></button></td>
+
+                <td hidden>
+                    <form id="editForm{{each.id}}" method="POST" action="{% url 'editPlayer' %}">
+                        {% csrf_token %}
+                    </form>
+                </td>
+                
+            </tr>
+            
+        
         {% endfor %}
     </tbody>
 </table>
+
+
+
+<form action="{% url 'addRoster' %}" method="get">
+    <button type="Submit" >Add Player</button>
+</form>
+
+<script>
+    function changeToInput(rowNum){
+        firstName = document.getElementById("td"+ rowNum + "fName").innerHTML
+        lastName = document.getElementById("td"+ rowNum + "lName").innerHTML
+        year = document.getElementById("td"+ rowNum + "year").innerHTML
+        position = document.getElementById("td"+ rowNum + "position").innerHTML
+        number = document.getElementById("td"+ rowNum + "number").innerHTML
+        
+        document.getElementById("td"+ rowNum + "fName").innerHTML = "<input type='text' name='first_name' value='" + firstName + "' form='editForm" + rowNum  + "'>"
+        document.getElementById("td"+ rowNum + "lName").innerHTML = "<input type='text' name='last_name' value= '"+ lastName + "' form='editForm" + rowNum  + "'>"
+        document.getElementById("td"+ rowNum + "year").innerHTML = "<input type='text' name='year' value= '"+ year + "' form='editForm" + rowNum  + "'>"
+        document.getElementById("td"+ rowNum + "position").innerHTML = "<input type='text' name='position' value= '"+ position + "' form='editForm" + rowNum  + "'>"
+        document.getElementById("td"+ rowNum + "number").innerHTML = "<input type='text' name='player_number' value= '"+ number + "' form='editForm" + rowNum  + "'>"
+        document.getElementById("editbtn" + rowNum).innerHTML = "<button type='submit' class='btn btn-success' form='editForm" + rowNum + "'>Submit</button"
+    }
+
+</script>
 {% endblock %}

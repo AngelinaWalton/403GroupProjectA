@@ -1,27 +1,32 @@
 from django.db import models
 
+
 # Create your models here.
 class Player(models.Model):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
-    FRESHMAN = 'FR'
-    SOPHOMORE = 'SO'
-    JUNIOR = 'JR'
-    SENIOR = 'SR'
-    GRADUATE = 'GR'
     YEAR_IN_SCHOOL_CHOICES = [
-        (FRESHMAN, 'Freshman'),
-        (SOPHOMORE, 'Sophomore'),
-        (JUNIOR, 'Junior'),
-        (SENIOR, 'Senior'),
-        (GRADUATE, 'Graduate'),
+        ("FR", 'Freshman'),
+        ('SO', 'Sophomore'),
+        ('JR', 'Junior'),
+        ('SR', 'Senior'),
+        ('GR', 'Graduate'),
     ]
-    year_in_school = models.CharField(
+    year = models.CharField(
         max_length=2,
         choices=YEAR_IN_SCHOOL_CHOICES,
-        default=FRESHMAN,
+        default="FR",
     )
-    position = models.CharField(max_length = 3) #same as above
+    POSITION_CHOICES =[
+        ("Att", "Attack"),
+        ("Mid", "Midfield"),
+        ("DM", "Defensive Midfield"),
+        ("LSM", "Long Stick Midfield"),
+        ("FOS", "Face Off Specialist"),
+        ("Def", "Defenseman"),
+        ("Goal", "Goalkeeper")
+    ]
+    position = models.CharField(max_length =4, choices=POSITION_CHOICES) #same as above
     player_number = models.PositiveSmallIntegerField()
 
     @property
@@ -47,6 +52,8 @@ class Stats(models.Model):
     assists = models.SmallIntegerField()
     points = models.SmallIntegerField()
     face_offs = models.SmallIntegerField()
+    goals_against = models.SmallIntegerField(default=0)
+    saves = models.SmallIntegerField(default=0)
     player_id = models.ForeignKey(Player, on_delete=models.PROTECT)
     game_id = models.ForeignKey(Schedule, on_delete= models.PROTECT)
 
