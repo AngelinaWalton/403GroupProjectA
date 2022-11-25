@@ -69,7 +69,7 @@ def editPlayer(request) :
 # STATS FUNCTIONS #
 
 def statsPageView(request):
-    data = Stats.objects.all().order_by("player_id_id")
+    data = Stats.objects.select_related('player_id', 'game_id').all().order_by("player_id_id")
     context = {
         "stats": data
     }
@@ -102,7 +102,7 @@ def deleteStats(request):
     return  HttpResponse("Something didn't work right, please try again.")
 
 def totalStats(request):
-    data = Stats.objects.values("player_id_id", 'player_id_id__player_number').annotate(totGb = Sum('ground_ball'), totGoals = Sum('goals'), totAssists = Sum('assists'), totPoints = Sum('points'), totFaces = Sum("face_offs"), totGoals_against = Sum('goals_against'), totSaves = Sum('saves'), avgAPG = Avg('assists'), avgGPG = Avg('goals'), avgPPG = Avg('points'), avgGAA = Avg('goals_against'), avgSPG = Avg('saves'))
+    data = Stats.objects.values("player_id_id", "player_id_id__first_name", "player_id_id__last_name", 'player_id_id__player_number').annotate(totGb = Sum('ground_ball'), totGoals = Sum('goals'), totAssists = Sum('assists'), totPoints = Sum('points'), totFaces = Sum("face_offs"), totGoals_against = Sum('goals_against'), totSaves = Sum('saves'), avgAPG = Avg('assists'), avgGPG = Avg('goals'), avgPPG = Avg('points'), avgGAA = Avg('goals_against'), avgSPG = Avg('saves')).order_by('player_id_id')
     context = {
         'totalStats': data
     }

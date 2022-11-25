@@ -5,7 +5,8 @@
 <table class="table">
     <thead>
       <tr>
-        <th scope="col">PlayerID</th>
+        <th scope="col">Player Number</th>
+        <th scope="col">Game Opponent</th>
         <th scope="col">Ground Balls</th>
         <th scope="col">Goals</th>
         <th scope="col">Assists</th>
@@ -13,7 +14,6 @@
         <th scope="col">Face Offs</th>
         <th scope="col">Goals Against</th>
         <th scope="col">Saves</th>
-        <th scope="col">Game ID</th>
         <th scope="col">Delete</th>
         <th scope="col">Edit</th>
       </tr>
@@ -21,7 +21,8 @@
     <tbody>
       {% for each in stats %}
       <tr>
-        <td  id = "td{{each.id}}id">{{each.player_id_id}}</td>
+        <td  id = "td{{each.id}}id">{{each.player_id.player_number}}</td>
+        <td id = "td{{each.id}}game_id">{{each.game_id.opponent}}</td>
         <td id = "td{{each.id}}ground_ball">{{each.ground_ball}}</td>
         <td id = "td{{each.id}}goals">{{each.goals}}</td>
         <td id = "td{{each.id}}assists">{{each.assists}}</td>
@@ -29,7 +30,6 @@
         <td id = "td{{each.id}}face_offs">{{each.face_offs}}</td>
         <td id = "td{{each.id}}goals_against">{{each.goals_against}}</td>
         <td id = "td{{each.id}}saves">{{each.saves}}</td>
-        <td id = "td{{each.id}}game_id">{{each.game_id_id}}</td>
         <form id="statsForm{{each.id}}" method="POST" action="{% url 'deleteStats' %}">
           {% csrf_token %}
           <td hidden><input type="hidden" name="id" id="id{{each.id}}" value="{{each.id}}"></td>
