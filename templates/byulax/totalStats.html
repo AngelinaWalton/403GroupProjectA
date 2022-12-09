@@ -4,6 +4,8 @@
 {% block title %}
     <title> BYU Stats </title>
 {% endblock%}
+<hr>
+<div class="container3">
 <table class="table">
     <thead>
       <tr>
@@ -44,5 +46,8 @@
         {%endfor%}
     </tbody>
 </table>
+</div>
+
+<a type="button" class="btn btn-primary" href="{% url 'stats'%}">Edit Stats</a> 
 
 {% endblock %}

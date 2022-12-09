@@ -1,0 +1,17 @@
+.container {
+    width: 80%;
+    text-align: left;
+    justify-content: left;
+    margin-top: 50px;
+}
+
+.container2{
+    margin: auto;
+    width: 60%;
+}
+
+/* .container3{
+    width:auto;
+    margin-top: 50px;
+
+} */

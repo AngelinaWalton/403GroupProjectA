@@ -1,8 +1,11 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
 {% block title %}
     <title> BYU Add Stats </title>
 {% endblock%}
+<div class="container">
+    <div class="container2">
 <fieldset>
     <form id="formAddStats" method="POST">
         {% csrf_token %}
@@ -21,6 +24,15 @@
         <label for="face_offs">Face Offs: </label>
         <input type="number" id="face_offs" name="face_offs" required>
         <br><br>
+
+        <label for="goals_against">Goals Against: </label>
+        <input type="number" id="goals_against" name="goals_against" required>
+        <br><br>
+
+        <label for="saves">Saves: </label>
+        <input type="number" id="saves" name="saves" required>
+        <br><br>
+
         <label for="player_id">Player ID: </label>
         <select id="player_id" name="player_id" required>
             {% for each in players %}
@@ -38,4 +50,6 @@
         <button type="submit">Submit New Stats</button>
     </form>
 </fieldset>
+</div>
+</div>
 {% endblock %}
