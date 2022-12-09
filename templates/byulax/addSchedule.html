@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
+{% block title %}
+    <title> BYU Add Game </title>
+{% endblock%}
 <fieldset>
     <form id="formAddRoster" method="POST">
         {% csrf_token %}

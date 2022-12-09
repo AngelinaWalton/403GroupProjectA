@@ -80,9 +80,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'byulaxdata',
         'USER': 'postgres',
-        'PASSWORD': getpass(), #remember to put in a password
+        'PASSWORD': 'nova12', #remember to put in a password
         'HOST': 'localhost',
-        'PORT': "5433" #change if someone else is hosting
     }
 }
 
