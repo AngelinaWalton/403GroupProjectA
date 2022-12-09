@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+{% block title %}
+    <title> BYU Stats </title>
+{% endblock%}
+<link href="{% static 'css/styles.css'%}" rel='stylesheet'>
 
 <header>
   <div style="width: 100%; text-align: center; background-color: #002E5D; color: white;">
@@ -14,7 +18,8 @@
 
   </div>
 </header>
-
+<hr>
+<div class="container3">
 <table class="table">
     <thead>
       <tr>
@@ -84,4 +89,5 @@
   </script>
 <br><br>
 <a type="button" href="{% url 'addStats' %}" class="btn btn-secondary">Add Stats</a>
+</div>
 {% endblock %}

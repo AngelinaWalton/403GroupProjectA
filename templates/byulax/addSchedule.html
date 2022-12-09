@@ -1,5 +1,11 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
+{% block title %}
+    <title> BYU Add Game </title>
+{% endblock%}
+<div class="container">
+    <div class="container2">
 <fieldset>
     <form id="formAddRoster" method="POST">
         {% csrf_token %}
@@ -12,8 +18,12 @@
         <label for="opponent">Opponent: </label>
         <input type="text" id="opponent" name="opponent" required>
         <br><br>
-        <label for="result">Result: </label>
-        <input type="text" id="result" value="0-0" name="result" required>
+        {% comment %} <label for="result">Result: </label>
+        <input type="text" id="result" value="0-0" name="result" required> {% endcomment %}
+        <label for="byuscore">BYU Score:</label>
+        <input type="number" id="byuscore" name="byuscore" required>
+        <label for="oppscore">Opponent Score:</label>
+        <input type="number" id="oppscore" name="oppscore" required>
         <br><br>
         <label for="info">Info: </label>
         <textarea id="info" rows="4" cols="35" name="info"></textarea>
@@ -21,4 +31,6 @@
         <button type="submit">Submit New Game</button>
     </form>
 </fieldset>
+</div>
+</div>
 {% endblock %}
