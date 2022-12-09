@@ -1,7 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+<link href="{% static 'css/styles.css'%}" rel='stylesheet'>
 
+<hr>
+<div class="container3">
 <table class="table">
     <thead>
       <tr>
@@ -71,4 +74,5 @@
   </script>
 <br><br>
 <a type="button" href="{% url 'addStats' %}" class="btn btn-secondary">Add Stats</a>
+</div>
 {% endblock %}

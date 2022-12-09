@@ -142,7 +142,10 @@ def addSchedulePage(request):
         new_game.date_time = request.POST['date']
         new_game.location = request.POST['location']
         new_game.opponent = request.POST['opponent']
-        new_game.result = request.POST['result']
+        byuscore = request.POST['byuscore']
+        oppscore = request.POST['oppscore']
+        result = str(byuscore) + '-' + str(oppscore)
+        new_game.result = result
         new_game.info = request.POST['info']
         new_game.save()
         return redirect('schedule')
