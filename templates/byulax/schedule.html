@@ -2,51 +2,56 @@
 {% load static %}
 {% block content %}
 
-<h1>Schedule</h1>
+<link href="{% static 'css/styles.css'%}" rel='stylesheet'>
 
-<table class="table">
-    <thead>
-      <tr>
-        <th scope="col" hidden>ID</th>
-        <th scope="col">Date/Time</th>
-        <th scope="col">Opponent</th>
-        <th scope="col">Location</th>
-        <th scope="col">Result</th>
-        <th scope="col">Info</th>
-        <th scope="col">Delete</th>
-        <th scope="col">Edit</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for each in game %}
-      
-      <tr style="height: 50px;">
-        <td id='td{{each.id}}date_time'>{{each.date_time}}</td>
-        <td id='td{{each.id}}opponent'>{{each.opponent}}</td>
-        <td id='td{{each.id}}location'>{{each.location}}</td>
-        <td id='td{{each.id}}result'>{{each.result}}</td>
-        <td id='td{{each.id}}info'>{{each.info}}</td>
-        <td hidden><input type="hidden" name="id" id="id{{each.id}}" value="{{each.id}}" form="editSchedule{{each.id}}"></td>
-        <form id="form{{each.id}}" method="POST" action="{% url 'deleteSchedule' %}">
-          {% csrf_token %}
-          <td hidden><input type="hidden" name="id" id="id{{each.id}}" value="{{each.id}}"></td>
-          <td><button type="submit" class="btn"><img src="{% static '/img/trash2.png'%}" style="width: 30px;"></button></td>
-        </form>
-        <td id="editbtn{{each.id}}"><button onclick="changeToInput('{{each.id}}')" class="btn"><img src="{% static '/img/pencil.png'%}" style="width: 30px; height: 30px;"></button></td>
-        <td hidden>
-          <form id="editSchedule{{each.id}}" method="POST" action="{% url 'editSchedule' %}">
-            {% csrf_token %} 
+<div class="container">
+  <h1>Schedule</h1>
+
+  <table class="table">
+      <thead>
+        <tr>
+          <th scope="col" hidden>ID</th>
+          <th scope="col">Date/Time</th>
+          <th scope="col">Opponent</th>
+          <th scope="col">Location</th>
+          <th scope="col">Result</th>
+          <th scope="col">Info</th>
+          <th scope="col">Delete</th>
+          <th scope="col">Edit</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for each in game %}
+        
+        <tr style="height: 50px;">
+          <td id='td{{each.id}}date_time'>{{each.date_time}}</td>
+          <td id='td{{each.id}}opponent'>{{each.opponent}}</td>
+          <td id='td{{each.id}}location'>{{each.location}}</td>
+          <td id='td{{each.id}}result'>{{each.result}}</td>
+          <td id='td{{each.id}}info'>{{each.info}}</td>
+          <td hidden><input type="hidden" name="id" id="id{{each.id}}" value="{{each.id}}" form="editSchedule{{each.id}}"></td>
+          <form id="form{{each.id}}" method="POST" action="{% url 'deleteSchedule' %}">
+            {% csrf_token %}
+            <td hidden><input type="hidden" name="id" id="id{{each.id}}" value="{{each.id}}"></td>
+            <td><button type="submit" class="btn"><img src="{% static '/img/trash2.png'%}" style="width: 30px;"></button></td>
           </form>
-        </td>
-      </tr>
+          <td id="editbtn{{each.id}}"><button onclick="changeToInput('{{each.id}}')" class="btn"><img src="{% static '/img/pencil.png'%}" style="width: 30px; height: 30px;"></button></td>
+          <td hidden>
+            <form id="editSchedule{{each.id}}" method="POST" action="{% url 'editSchedule' %}">
+              {% csrf_token %} 
+            </form>
+          </td>
+        </tr>
 
-      {% endfor %}
-    </tbody>
-  </table>
-
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+<div class = "container">
 <form action="{% url 'addSchedule' %}" method="get">
   <button type="Submit" class="btn btn-primary">Add A Game</button>
 </form>
+</div>
 <script>
   function changeToInput(rowNum){
     date_time = document.getElementById("td" + rowNum + "date_time").innerHTML
