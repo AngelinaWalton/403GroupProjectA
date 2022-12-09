@@ -1,4 +1,21 @@
 {% extends 'base.html' %}
+
+{% load static %}
+
 {% block content %}
-    <h1>Welcome To the BYU Lacrosse Team Fan Page!!!</h1>
+<header>
+    <div style="width: 100%; text-align: center; background-color: #002E5D; color: white;">
+        <h1>BYU Men's Lacrosse</h1>
+        <br>
+        <div>
+            <img src='{% static "img/index_bg.jpeg" %}' alt="" width="100%">
+            <strong><p style="font-size: 30px; position: absolute; width: 100%; text-align: center; top: 25%; left: 50%; transform: translate(-50%, -50%);">Home Page</p></strong>
+            <form action="{% url 'schedule' %}">
+                <button  style="font-size: 30px; position: absolute; text-align: center; top: 100%; left: 50%; transform: translate(-50%, -50%);"> View Schedule</button>
+            </form>
+        </div>
+        
+
+    </div>
+</header>
 {% endblock %}
