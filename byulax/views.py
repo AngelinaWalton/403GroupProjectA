@@ -100,6 +100,8 @@ def addStatsPage(request):
         new_stat.face_offs = request.POST['face_offs']
         new_stat.player_id_id = request.POST['player_id']
         new_stat.game_id_id = request.POST['game_id']
+        new_stat.goals_against = request.POST['goals_against']
+        new_stat.saves = request.POST['saves']
         new_stat.save()
         return redirect('stats')
     playerList = Player.objects.all()
