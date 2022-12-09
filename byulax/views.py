@@ -65,10 +65,10 @@ def editPlayer(request) :
 
 def searchRoster(request):
     if request.method == "POST":
-        search = request.POST['searchInput'].split(' ')
-        fname = search[0]
-        lname = search[1]
         try:
+            search = request.POST['searchInput'].split(' ')
+            fname = search[0]
+            lname = search[1]
             player = Player.objects.get(first_name = fname, last_name = lname)
             print(fname + " " + lname + " " + str(player))
             context = {
