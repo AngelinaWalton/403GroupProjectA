@@ -62,6 +62,21 @@ def editPlayer(request) :
         return redirect("roster")
     return HttpResponse("Error")
 
+
+def searchRoster(request):
+    if request.method == "POST":
+        search = request.POST['searchInput'].split(' ')
+        fname = search[0]
+        lname = search[1]
+        try:
+            player = Player.objects.get(first_name = fname, last_name = lname)
+            print(fname + " " + lname + " " + str(player))
+            context = {
+                "player" : [player]
+            }
+            return render(request, 'byulax/roster.html', context)     
+        except:
+            return redirect("roster")
 # END ROSTER FUNCTIONS #
 ########################
 

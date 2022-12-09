@@ -7,6 +7,7 @@ urlpatterns = [
     path('roster/add/',addPlayer, name="addRoster"),
     path('roster/delete/', deletePlayer, name="deletePlayer"),
     path('roster/edit/', editPlayer, name="editPlayer"),
+    path('roster/search/', searchRoster, name="searchRoster"),
     path('schedule/', schedulePageView, name = 'schedule'),
     path('schedule/add/', addSchedulePage, name= 'addSchedule'),
     path('schedule/delete/', deleteSchedule, name="deleteSchedule"),
