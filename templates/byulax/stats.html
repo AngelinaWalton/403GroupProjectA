@@ -1,7 +1,23 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-
+{% block title %}
+    <title> BYU Stats </title>
+{% endblock%}
+<link href="{% static 'css/styles.css'%}" rel='stylesheet'>
+<header>
+  <div style="width: 100%; text-align: center; background-color: #002E5D; color: white;">
+      <h1>BYU Men's Lacrosse</h1>
+      <br>
+      <div style="height: 700px; overflow: hidden;">
+          <img src='{% static "img/stats.jpg" %}' alt="" width="100%">
+          <strong><p style="font-size: 30px; position: absolute; width: 100%; text-align: center; top: 25%; left: 50%; transform: translate(-50%, -50%);">Statistics</p></strong>
+      </div>
+      
+  </div>
+</header>
+<hr>
+<div class="container3">
 <table class="table">
     <thead>
       <tr>
@@ -70,5 +86,7 @@
     }
   </script>
 <br><br>
-<a type="button" href="{% url 'addStats' %}" class="btn btn-secondary">Add Stats</a>
+<a type="button" href="{% url 'addStats' %}" class="btn btn-primary">Add Stats</a>
+</div>
+</div>
 {% endblock %}

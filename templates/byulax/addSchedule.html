@@ -1,5 +1,23 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
+{% block title %}
+    <title> BYU Add Game </title>
+{% endblock%}
+<header>
+    <div style="width: 100%; text-align: center; background-color: #002E5D; color: white;">
+        <h1>BYU Men's Lacrosse</h1>
+        <br>
+        <div style="height: 700px; overflow: hidden;">
+            <img src='{% static "img/schedule.jpg" %}' alt="" width=100%%>
+            <strong><p style="font-size: 30px; position: absolute; width: 100%; text-align: center; top: 25%; left: 50%; transform: translate(-50%, -50%);">Schedule</p></strong>
+        </div>
+        
+  
+    </div>
+  </header>
+<div class="container">
+    <div class="container2">
 <fieldset>
     <form id="formAddRoster" method="POST">
         {% csrf_token %}
@@ -12,13 +30,19 @@
         <label for="opponent">Opponent: </label>
         <input type="text" id="opponent" name="opponent" required>
         <br><br>
-        <label for="result">Result: </label>
-        <input type="text" id="result" value="0-0" name="result" required>
+        {% comment %} <label for="result">Result: </label>
+        <input type="text" id="result" value="0-0" name="result" required> {% endcomment %}
+        <label for="byuscore">BYU Score:</label>
+        <input type="number" id="byuscore" name="byuscore" required>
+        <label for="oppscore">Opponent Score:</label>
+        <input type="number" id="oppscore" name="oppscore" required>
         <br><br>
         <label for="info">Info: </label>
         <textarea id="info" rows="4" cols="35" name="info"></textarea>
         <br><br>
-        <button type="submit">Submit New Game</button>
+        <button type="submit" class="btn btn-primary">Submit New Game</button>
     </form>
 </fieldset>
+</div>
+</div>
 {% endblock %}

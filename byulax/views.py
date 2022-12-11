@@ -62,6 +62,21 @@ def editPlayer(request) :
         return redirect("roster")
     return HttpResponse("Error")
 
+
+def searchRoster(request):
+    if request.method == "POST":
+        try:
+            search = request.POST['searchInput'].split(' ')
+            fname = search[0]
+            lname = search[1]
+            player = Player.objects.get(first_name = fname, last_name = lname)
+            print(fname + " " + lname + " " + str(player))
+            context = {
+                "player" : [player]
+            }
+            return render(request, 'byulax/roster.html', context)     
+        except:
+            return redirect("roster")
 # END ROSTER FUNCTIONS #
 ########################
 
@@ -85,6 +100,8 @@ def addStatsPage(request):
         new_stat.face_offs = request.POST['face_offs']
         new_stat.player_id_id = request.POST['player_id']
         new_stat.game_id_id = request.POST['game_id']
+        new_stat.goals_against = request.POST['goals_against']
+        new_stat.saves = request.POST['saves']
         new_stat.save()
         return redirect('stats')
     playerList = Player.objects.all()
@@ -142,7 +159,10 @@ def addSchedulePage(request):
         new_game.date_time = request.POST['date']
         new_game.location = request.POST['location']
         new_game.opponent = request.POST['opponent']
-        new_game.result = request.POST['result']
+        byuscore = request.POST['byuscore']
+        oppscore = request.POST['oppscore']
+        result = str(byuscore) + '-' + str(oppscore)
+        new_game.result = result
         new_game.info = request.POST['info']
         new_game.save()
         return redirect('schedule')
