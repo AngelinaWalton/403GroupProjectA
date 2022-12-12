@@ -72,6 +72,7 @@ TEMPLATES = [
             ],
         },
     },
+    
 ]
 
 WSGI_APPLICATION = 'project1a.wsgi.application'
