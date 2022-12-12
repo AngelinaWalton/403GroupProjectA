@@ -1,1 +1,1 @@
-web: python manage.py migrate && gunicorn byulax.wsgi
+web: python manage.py migrate && gunicorn project1a.wsgi
